@@ -1,0 +1,32 @@
+{%extends "blog/post/base.html"%}
+{%block title%}Blogger{%endblock%}
+{%block content%}
+<h1 id="Blogger">Published Works</h1>
+{%if tag%}
+    <h2>Posts tagged with "{{tag.name}}"</h2>
+{%endif%}
+{%for post in posts%}
+<div class="post">
+    <h2>
+        <a href="{{ post.get_absolute_url }}">
+            {{ post.title }}
+        </a>
+    </h2>
+<p class="date">
+    Published {{ post.publish }} by {{ post.author }}
+</p>
+{{ post.body|truncatewords:100|linebreaks }}
+<p class="tags">
+    Tags:
+    {%for tag in post.tags.all%}
+    <a href="{%url 'blogger:post_list_by_tag' tag.slug%}">
+        {{tag.name}}
+    </a>{%if not forloop.last%},{%endif%}
+    {%endfor%}
+</p>
+</div>
+{%endfor%}
+<div class="pagination">
+        {% include "pagination.html" with page=page %}
+    </div>
+{%endblock%}

@@ -1,0 +1,278 @@
+
+#Blogger {
+    font-size: 3rem;
+    font-weight: bold;
+
+    background: linear-gradient(50deg, violet, indigo, blue, green, yellow, orange, red, violet);
+    background-size: 200% 200%; /* large gradient for smooth movement */
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    animation: rainbowMove 20s linear infinite;
+}
+
+@keyframes rainbowMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ======================
+   GLOBAL BODY
+   ====================== */
+body {
+    font-family: "Segoe UI", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+    background: #111; /* darker for floating vibe */
+    color: #eee;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* ======================
+   LINKS
+   ====================== */
+a {
+    color: #ff6fff;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+a:hover {
+    color: #ff00ff;
+    text-decoration: underline;
+}
+
+/* ======================
+   CONTENT LAYOUT
+   ====================== */
+#content {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* ======================
+   CARD BASE STYLE
+   ====================== */
+.post {
+    background: #1f1f1f;
+    border-radius: 16px;
+    padding: 28px 24px;
+    box-shadow: 0 6px 20px rgba(255, 0, 255, 0.2);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+    z-index: 1;
+    will-change: transform;
+}
+
+/* ======================
+   FLYING CARPET HOVER EFFECT
+   ====================== */
+.post:hover {
+    animation: flyHover 2s ease-in-out infinite;
+    transform: translateY(-15px) rotateZ(var(--random-rotate)) scale(1.05);
+    box-shadow: 0 20px 60px rgba(255, 0, 255, 0.5);
+    z-index: 10;
+}
+
+
+/* ======================
+   POST HEADINGS + META
+   ====================== */
+.post h2 {
+    margin-top: 0;
+    color: #ff6fff;
+}
+.post .date {
+    font-size: 0.85em;
+    color: #aaa;
+}
+
+/* ======================
+   POST DETAIL
+   ====================== */
+.post-detail {
+    background: #222;
+    border-radius: 18px;
+    padding: 36px;
+    box-shadow: 0 14px 40px rgba(255, 0, 255, 0.4);
+}
+.post-detail h1 {
+    margin-top: 0;
+    color: #ff6fff;
+}
+.post-detail .date {
+    font-size: 0.9em;
+    color: #bbb;
+}
+
+/* ======================
+   COMMENTS
+   ====================== */
+.comment {
+    background: #2b2b2b;
+    border-left: 4px solid #ff6fff;
+    padding: 16px;
+    margin-bottom: 16px;
+    border-radius: 10px;
+}
+
+/* ======================
+   COMMENT FORM
+   ====================== */
+.comment-form {
+    background: #222;
+    padding: 24px;
+    border-radius: 16px;
+}
+
+.comment-form input,
+.comment-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background: #111;
+    color: #eee;
+}
+.comment-form input::placeholder,
+.comment-form textarea::placeholder {
+    color: #888;
+}
+.comment-form button {
+    background: #ff6fff;
+    border: none;
+    color: #111;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.comment-form button:hover {
+    background: #ff00ff;
+    transform: scale(1.05);
+}
+
+/* ======================
+   PAGINATION
+   ====================== */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 40px;
+    z-index: 10;
+}
+
+.page-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: #222;
+    color: #ccc;
+    border: 1px solid #444;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+.page-btn:hover {
+    background: #ff6fff;
+    color: #111;
+}
+.page-btn.active {
+    background: #ff6fff;
+    color: #111;
+}
+
+/* ======================
+   SUCCESS MESSAGE
+   ====================== */
+.success-message {
+    background: #222;
+    border-left: 4px solid #ff6fff;
+    padding: 16px;
+    border-radius: 10px;
+    color: #ffccff;
+}
+
+/* ======================
+   LIGHT MODE
+   ====================== */
+body.light-mode {
+    background: #f5f5f5;
+    color: #111;
+}
+body.light-mode a {
+    color: #ff33cc;
+}
+body.light-mode a:hover {
+    color: #ff0066;
+}
+body.light-mode .post {
+    background: #fff;
+    box-shadow: 0 6px 20px rgba(255, 51, 204, 0.2);
+    color: #111;
+}
+body.light-mode .post:hover {
+    box-shadow: 0 20px 60px rgba(255, 51, 204, 0.4);
+}
+body.light-mode .post h2 {
+    color: #ff33cc;
+}
+body.light-mode .post .date {
+    color: #555;
+}
+body.light-mode .post-detail {
+    background: #fafafa;
+    box-shadow: 0 14px 40px rgba(255, 51, 204, 0.3);
+}
+body.light-mode .post-detail h1 {
+    color: #ff33cc;
+}
+body.light-mode .post-detail .date {
+    color: #666;
+}
+body.light-mode .comment {
+    background: #eee;
+    border-left: 4px solid #ff33cc;
+    color: #111;
+}
+body.light-mode .comment-form {
+    background: #fafafa;
+}
+body.light-mode .comment-form input,
+body.light-mode .comment-form textarea {
+    background: #fff;
+    color: #111;
+    border: 1px solid #ccc;
+}
+body.light-mode .comment-form input::placeholder,
+body.light-mode .comment-form textarea::placeholder {
+    color: #aaa;
+}
+body.light-mode .comment-form button {
+    background: #ff33cc;
+    color: #fff;
+}
+body.light-mode .comment-form button:hover {
+    background: #ff0066;
+}
+body.light-mode .pagination .page-btn {
+    background: #f0f0f0;
+    color: #555;
+    border: 1px solid #ccc;
+}
+body.light-mode .pagination .page-btn:hover,
+body.light-mode .pagination .page-btn.active {
+    background: #ff33cc;
+    color: #fff;
+}
+body.light-mode .success-message {
+    background: #fafafa;
+    border-left: 4px solid #ff33cc;
+    color: #111;
+}

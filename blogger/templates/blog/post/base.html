@@ -1,0 +1,70 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% endblock title %}</title>
+  <link href="{% static 'blogger/css/blog.css' %}" rel="stylesheet">
+  <style>
+    /* Toggle button */
+    #mode-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #ff6fff;
+      color: #111;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 9999;
+      transition: background 0.3s ease;
+    }
+    #mode-toggle:hover {
+      background: #ff00ff;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <button id="mode-toggle">Toggle Light/Dark</button>
+
+  <div id="content">
+      {% block content %}
+      {% endblock content %}
+  </div>
+
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const posts = document.querySelectorAll('.post');
+
+  // Restore mode from localStorage
+  if(localStorage.getItem('theme') === 'light') {
+      document.body.classList.add('light-mode');
+  }
+
+  // Hover random rotation
+  posts.forEach(post => {
+    post.addEventListener('mouseenter', () => {
+      const randomDeg = (Math.random() * 5) - 2.5; // -10 to +10
+      post.style.setProperty('--random-rotate', `${randomDeg}deg`);
+    });
+  });
+
+  // Toggle button
+  const modeToggle = document.getElementById('mode-toggle');
+  modeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+    // Save preference
+    if(document.body.classList.contains('light-mode')){
+        localStorage.setItem('theme','light');
+    } else {
+        localStorage.setItem('theme','dark');
+    }
+  });
+});
+</script>
+</body>
+</html>
