@@ -16,11 +16,16 @@ Including another URLconf
 """
 
 from django.contrib import admin #type:ignore
+from django.contrib.sitemaps.views import sitemap #type:ignore
 from django.urls import include,path #type:ignore
 from blogger import views
+from blogger.sitemaps import PostSitemap as psmp
+
+sitemaps={'posts':psmp,}
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('',views.post_list,name='post_list'),
-    path('blogger/',include('blogger.urls',namespace='blogger'))
+    path('blogger/',include('blogger.urls',namespace='blogger')),
+	path('sitemap.xml',sitemap,{'sitemaps':sitemaps},name='django.contrib.sitemaps.views.sitemaps')
 ]
